@@ -170,7 +170,7 @@ function initializeForm() {
     const artistName = currentConfig.elements.find(el => el.name === "Artist Name");
     const songTitle = currentConfig.elements.find(el => el.name === "Song Title");
     const nowPlaying = currentConfig.elements.find(el => el.text === "Now Playing");
-    const songFile = currentConfig.elements.find(el => el.name === "Song File");
+    const songFile = currentConfig.elements.find(el => el.type === "audio");
 
     document.getElementById('promo-image').value = promoImage?.source || '';
     document.getElementById('artist-name').value = artistName?.text || '';
@@ -200,14 +200,19 @@ document.getElementById('control-form').addEventListener('submit', async (e) => 
         if (element.text === "Now Playing") {
             return { ...element, fill_color: formData.get('now-playing-color') };
         }
-        if (element.name === "Song File") {
+        if (element.type === "audio") {
             return { ...element, source: formData.get('audio-url') };
         }
         return element;
     });
 
     // Update the preview
-    await preview.setSource(currentConfig);
+    try {
+        await preview.setSource(currentConfig);
+        console.log('Preview updated successfully');
+    } catch (error) {
+        console.error('Error updating preview:', error);
+    }
 });
 
 // Update color input hex display
