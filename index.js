@@ -163,6 +163,37 @@ let currentConfig = {
     ]
 };
 
+// Make currentConfig available globally
+window.currentConfig = currentConfig;
+
+// Function to update preview from JSON editor
+window.updateFromJSON = async function() {
+    try {
+        const jsonValue = window.editor.getValue();
+        const newConfig = JSON.parse(jsonValue);
+        currentConfig = newConfig;
+        await preview.setSource(currentConfig);
+        initializeForm(); // Update the form with new values
+        console.log('Preview updated from JSON successfully');
+    } catch (error) {
+        console.error('Error updating from JSON:', error);
+        alert('Invalid JSON format');
+    }
+};
+
+// Function to format JSON
+window.formatJSON = function() {
+    try {
+        const jsonValue = window.editor.getValue();
+        const parsed = JSON.parse(jsonValue);
+        const formatted = JSON.stringify(parsed, null, 2);
+        window.editor.setValue(formatted);
+    } catch (error) {
+        console.error('Error formatting JSON:', error);
+        alert('Invalid JSON format');
+    }
+};
+
 // Initialize form with current values
 function initializeForm() {
     const form = document.getElementById('control-form');
@@ -208,6 +239,11 @@ document.getElementById('control-form').addEventListener('submit', async (e) => 
 
     // Update the preview
     await preview.setSource(currentConfig);
+
+    // Update the JSON editor with new config
+    if (window.editor) {
+        window.editor.setValue(JSON.stringify(currentConfig, null, 2));
+    }
 });
 
 // Update color input hex display
