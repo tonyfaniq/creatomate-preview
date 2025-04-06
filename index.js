@@ -125,7 +125,7 @@ let currentConfig = {
         "type": "audio",
         "track": 8,
         "source": "https://samplelib.com/lib/preview/mp3/sample-12s.mp3",
-        "trim_duration": 13,
+        "trim_duration": 15,
         "dynamic": true
       },
       {
