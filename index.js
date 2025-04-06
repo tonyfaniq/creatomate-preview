@@ -125,7 +125,7 @@ let currentConfig = {
         "type": "audio",
         "track": 8,
         "source": "https://samplelib.com/lib/preview/mp3/sample-12s.mp3",
-        "trim_duration": 15,
+        "trim_duration": 13,
         "dynamic": true
       },
       {
@@ -170,7 +170,7 @@ function initializeForm() {
     const artistName = currentConfig.elements.find(el => el.name === "Artist Name");
     const songTitle = currentConfig.elements.find(el => el.name === "Song Title");
     const nowPlaying = currentConfig.elements.find(el => el.text === "Now Playing");
-    const songFile = currentConfig.elements.find(el => el.type === "audio");
+    const songFile = currentConfig.elements.find(el => el.name === "Song File");
 
     document.getElementById('promo-image').value = promoImage?.source || '';
     document.getElementById('artist-name').value = artistName?.text || '';
@@ -200,19 +200,14 @@ document.getElementById('control-form').addEventListener('submit', async (e) => 
         if (element.text === "Now Playing") {
             return { ...element, fill_color: formData.get('now-playing-color') };
         }
-        if (element.type === "Song File") {
+        if (element.name === "Song File") {
             return { ...element, source: formData.get('audio-url') };
         }
         return element;
     });
 
     // Update the preview
-    try {
-        await preview.setSource(currentConfig);
-        console.log('Preview updated successfully');
-    } catch (error) {
-        console.error('Error updating preview:', error);
-    }
+    await preview.setSource(currentConfig);
 });
 
 // Update color input hex display
