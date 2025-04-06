@@ -124,7 +124,7 @@ let currentConfig = {
         "name": "Song File",
         "type": "audio",
         "track": 8,
-        "source": "37ffac82-b8fe-4eed-b86d-fbbeddbece1c",
+        "source": "https://samplelib.com/lib/preview/mp3/sample-12s.mp3",
         "trim_duration": 13,
         "dynamic": true
       },
@@ -200,7 +200,7 @@ document.getElementById('control-form').addEventListener('submit', async (e) => 
         if (element.text === "Now Playing") {
             return { ...element, fill_color: formData.get('now-playing-color') };
         }
-        if (element.type === "audio") {
+        if (element.type === "Song File") {
             return { ...element, source: formData.get('audio-url') };
         }
         return element;
