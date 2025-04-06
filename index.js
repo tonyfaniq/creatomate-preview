@@ -170,11 +170,13 @@ function initializeForm() {
     const artistName = currentConfig.elements.find(el => el.name === "Artist Name");
     const songTitle = currentConfig.elements.find(el => el.name === "Song Title");
     const nowPlaying = currentConfig.elements.find(el => el.text === "Now Playing");
+    const songFile = currentConfig.elements.find(el => el.name === "Song File");
 
     document.getElementById('promo-image').value = promoImage?.source || '';
     document.getElementById('artist-name').value = artistName?.text || '';
     document.getElementById('song-title').value = songTitle?.text || '';
     document.getElementById('now-playing-color').value = nowPlaying?.fill_color || '#0a9900';
+    document.getElementById('audio-url').value = songFile?.source || '';
 }
 
 // Handle form submission
@@ -197,6 +199,9 @@ document.getElementById('control-form').addEventListener('submit', async (e) => 
         }
         if (element.text === "Now Playing") {
             return { ...element, fill_color: formData.get('now-playing-color') };
+        }
+        if (element.name === "Song File") {
+            return { ...element, source: formData.get('audio-url') };
         }
         return element;
     });
