@@ -6,8 +6,9 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch",
-    "prepack": "npm run build"
+    "dev": "node your-development-server.js",
+    "prepack": "npm run build",
+    "test": "jest"
   },
   "publishConfig": {
     "access": "public"
