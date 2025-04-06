@@ -124,8 +124,8 @@ let currentConfig = {
         "name": "Song File",
         "type": "audio",
         "track": 8,
-        "source": "37ffac82-b8fe-4eed-b86d-fbbeddbece1c",
-        "trim_duration": 13,
+        "source": "https://samplelib.com/lib/preview/mp3/sample-12s.mp3",
+        "trim_duration": 10,
         "dynamic": true
       },
       {
